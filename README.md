@@ -49,3 +49,8 @@ sending message
 # fetching users
 
 - return all the users accept the current authenticated users
+
+! Issues
+
+- Socket-io and real time messaging is still malfunctioning
+- the design is not mobile responsive

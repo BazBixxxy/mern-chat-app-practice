@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
+import { app, server } from "./sockets/socket.js";
 config();
 
 // file imports
@@ -10,7 +11,7 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import MONGODB_CONNECTION from "./database/mongodb.js";
 
-const app = express();
+// const app = express();
 const PORT = process.env.PORT || 5000;
 
 // middleware
@@ -25,17 +26,17 @@ app.get("/test", (req, res) => {
   res.status(200).json("local server running here😊");
 });
 
-// app.listen(PORT, () => {
+// server.listen(PORT, () => {
 //   console.log(`server is running on port ${PORT}`);
 //   MONGODB_CONNECTION();
 // });
 
-// connections
+// connection
 mongoose
   .connect(`${process.env.MONGODB_URI}`)
   .then(() => {
     console.log("connected to database");
-    app.listen(5000, () => {
+    server.listen(5000, () => {
       console.log("server is running on port 5000");
     });
   })
